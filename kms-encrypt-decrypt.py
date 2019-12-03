@@ -6,15 +6,15 @@ from pprint import pprint
 # create main method
 def main(argv):
 
-    # create a session to retrieve 'admin' credentials from ~/.aws/credentials
-    session = boto3.Session(profile_name='admin')
+    # create a session to retrieve '<USER>' credentials from ~/.aws/credentials
+    session = boto3.Session(profile_name='<USER>')
 
     # create a client with KMS
     kms = session.client('kms', region_name='us-east-1')
 
     # generate a temporary encryption/data key
     data_key = kms.generate_data_key(
-        KeyId='arn:aws:kms:us-east-1:186570641799:key/e19aa50f-b781-4c9c-a739-61efd9b7982e',
+        KeyId='<ARN OF YOUR KEY>',
         KeySpec='AES_256',
     )
 
