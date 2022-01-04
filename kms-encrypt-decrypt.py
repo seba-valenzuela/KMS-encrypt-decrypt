@@ -6,9 +6,9 @@ from cryptography.fernet import Fernet
 # for pretty printing
 from pprint import pprint
 
-# create a session to retrieve 'admin' credentials from ~/.aws/credentials
+# create a session to retrieve 'YOUR-USER' credentials from ~/.aws/credentials
 # session is a class, you're creating a class called "session"
-session = boto3.Session(profile_name='admin')
+session = boto3.Session(profile_name='YOUR-USER')
 
 # create a client with KMS
 # client is a method, because you're acting on session
@@ -63,11 +63,11 @@ def encrypt_file(plain_key, filename):
 # create main method
 def main(argv):
 
-    # plaintext key is [0], ciphertext key is [1]
-    keys = generate_key_pair('arn:aws:kms:us-east-1:186570641799:key/e19aa50f-b781-4c9c-a739-61efd9b7982e')
+    # plaintext key is keys[0], ciphertext key is keys[1]
+    keys = generate_key_pair('YOUR-KMS-ARN')
 
     # Send plaintext key and filename, return encrypted file
-    encrypted_secret = encrypt_file(keys[0], "secret_4encryption.txt")
+    encrypted_secret = encrypt_file(keys[0], "FILENAME")
     
     # decrypt the cyphertext key with KMS call
     response = kms.decrypt(CiphertextBlob=keys[1]) # keys[1] is cyphertext key
